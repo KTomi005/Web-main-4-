@@ -11,7 +11,7 @@ const App = () => {
               <Route path="/" element={<KezdoLap />} />
               <Route path="/register" element={<LoginSignup />} />
               <Route path="/login" element={<LoginSignup />} />
-              <Route path="/web.html" element={<h1>Web oldal</h1>} />  
+              <Route path="/Web.html" element={<h1>Web oldal</h1>} />  
           </Routes>
       </Router>
   );

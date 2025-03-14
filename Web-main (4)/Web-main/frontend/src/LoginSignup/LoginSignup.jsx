@@ -22,6 +22,8 @@ const LoginSignup = () => {
     const [showModal, setShowModal] = useState(false);
     const [username, setUsername] = useState('');
 
+
+
     const registerLink = () => setAction('register');
     const loginLink = () => setAction('login');
 
@@ -52,8 +54,9 @@ const LoginSignup = () => {
                     setUsername(username);
                     setShowModal(true);
                     setTimeout(() => {
-                        window.location.href = "Web.html";
-                    }, 2000);
+                        // Itt a sima URL átirányítás
+                        window.location.href = "/Web.html";  // Ez a statikus HTML fájlra navigál
+                    }, 2000);   
                 } else {
                     setErrorMessage(`Registration failed! Server says: ${data.message}`);
                 }
@@ -81,7 +84,8 @@ const LoginSignup = () => {
                 if (data.message === "Login successful!") {
                     setSuccessMessage("Login successful! Redirecting...");
                     setTimeout(() => {
-                        window.location.href = "Web.html";
+                        // Itt a sima URL átirányítás
+                        window.location.href = "/Web.html";  // Ez a statikus HTML fájlra navigál
                     }, 2000);
                 } else {
                     setErrorMessage("Invalid username or password!");
@@ -132,7 +136,6 @@ const LoginSignup = () => {
     return (
         <div className="login-signup">
             <div className={`wrapper ${action}`}>
-
                 {/* Bejelentkezési forma */}
                 <div className={`form-box login ${action === 'login' ? 'show' : ''}`}>
                     <form onSubmit={handleLoginSubmit}>
@@ -163,8 +166,12 @@ const LoginSignup = () => {
                             </div>
                         </div>
                     )}
+                         {successMessage && (
+                            <div className="success-message">
+                                <p>{successMessage}</p>
+                            </div>
+                        )}
                 </div>
-
                 {/* Regisztrációs forma */}
                 <div className={`form-box register ${action === 'register' ? 'show' : ''}`}>
                     <form onSubmit={handleRegisterSubmit}>
