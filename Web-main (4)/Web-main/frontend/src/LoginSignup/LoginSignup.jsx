@@ -160,6 +160,9 @@ const LoginSignup = () => {
                         <div className="register-link">
                             <p>Don't have an account? <a href="#" onClick={registerLink}>Register</a></p>
                         </div>
+                        <div className="Forgotted Password">
+                            <p>Forgot Password?  <a href="">Click here!</a></p>
+                        </div>
                     </form>
                     {showModal &&(
                         <div className="modal-overlay">
@@ -214,7 +217,9 @@ const LoginSignup = () => {
 
                         <label className="checkbox-container">
                             <input type="checkbox" required />
-                            <p id="terms">I agree to the terms & conditions</p>
+                            <div className="termsConditions">
+                            <p>I agree to the <a href="">terms & conditions</a></p>
+                            </div>
                         </label>
 
                         <button type="submit">Register</button>
