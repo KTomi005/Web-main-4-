@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../css/LoginSignup.css'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const LoginSignup = () => {
     const location = useLocation();
@@ -26,6 +26,7 @@ const LoginSignup = () => {
     const loginLink = () => {
         setAction('login');  // Bejelentkezési form aktívvá tétele
     };
+
 
     const handleRegisterSubmit = (e) => {
         e.preventDefault();
@@ -134,8 +135,7 @@ const LoginSignup = () => {
 
     return (
         <div className="login-signup">
-            <div className={`wrapper ${action}`}>
-                {/* Bejelentkezési forma */}
+            <div className={`wrapper ${action}`}>    
                 <div className={`form-box login ${action === 'login' ? 'show' : ''}`}>
                     <form onSubmit={handleLoginSubmit}>
                         <h1>Login</h1>
@@ -160,8 +160,8 @@ const LoginSignup = () => {
                         <div className="register-link">
                             <p>Don't have an account? <a href="#" onClick={registerLink}>Register</a></p>
                         </div>
-                        <div className="Forgotted Password">
-                            <p>Forgot Password?  <a href="">Click here!</a></p>
+                        <div className="forgot-password">
+                            <p>Forgot Password?  <Link to="/forgot-password">Click here!</Link></p>
                         </div>
                     </form>
                     {showModal &&(

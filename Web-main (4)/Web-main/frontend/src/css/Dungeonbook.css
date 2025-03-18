@@ -69,4 +69,3 @@ button:disabled {
 button:hover:not(:disabled) {
     background-color: #e67e22;
 }
- 

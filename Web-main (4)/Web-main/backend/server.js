@@ -3,6 +3,8 @@ import cors from 'cors';
 import mysql2 from 'mysql2';
 import bodyParser from 'body-parser';
 import bcrypt from 'bcrypt';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 
 const app = express();
 const saltRounds = 5;
@@ -15,11 +17,11 @@ app.get("/", (req, res) => {
 });
 
 const db = mysql2.createConnection({
-    user: "sabpat702",
-    host: "10.3.1.65",
-    port: 3306,
-    password: "72587413702",
-    database: "sabpat702",
+    user: process.env.DB_USER || "sabpat702",
+    host: process.env.DB_HOST || "10.3.1.65",
+    port: process.env.DB_PORT || 3306,
+    password: process.env.DB_PASSWORD || "72587413702",
+    database: process.env.DB_NAME || "sabpat702",
 });
 
 db.connect(err => {
@@ -29,6 +31,23 @@ db.connect(err => {
         console.log('Connected to MySQL');
     }
 });
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER, // From .env
+      pass: process.env.EMAIL_PASS, // From .env (use App Password if 2FA is on)
+    },
+  });
+  
+  // Test Nodemailer setup
+  transporter.verify((error, success) => {
+    if (error) {
+      console.error('Nodemailer configuration error:', error);
+    } else {
+      console.log('Nodemailer is ready to send emails');
+    }
+  });
 
 // Felhasználók lekérdezése
 app.get('/signup', (req, res) => {
@@ -98,6 +117,46 @@ app.post('/login', (req, res) => {
     });
 });
 
+
+app.post('/forgot-password', (req, res) => {
+    const { email } = req.body;
+  
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required!' });
+    }
+  
+    // Check if the email exists in the database
+    const query = 'SELECT * FROM user WHERE Email = ?';
+    db.query(query, [email], (err, results) => {
+      if (err) {
+        console.error('Database error:', err);
+        return res.status(500).json({ message: 'Error checking email.' });
+      }
+  
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'Email not found.' });
+      }
+  
+      // Email options
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'Password Reset Request',
+        text: `Hello,\n\nYou requested a password reset. Click this link to reset your password: http://localhost:3000/reset-password?email=${email}\n\nIf you didn’t request this, ignore this email.`,
+      };
+  
+      // Send the email
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Error sending email:', error);
+          return res.status(500).json({ message: 'Error sending reset email.' });
+        }
+        console.log('Reset email sent:', info.response);
+        res.status(200).json({ message: 'Reset email sent successfully!' });
+      });
+    });
+  });
+  
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
 });
