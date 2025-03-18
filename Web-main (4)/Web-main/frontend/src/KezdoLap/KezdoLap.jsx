@@ -33,7 +33,7 @@ const KezdoLap = () => {
 
       
       <div class="col-md-6 text-center">
-        <img src="/Helpful_Tips.png" alt="Helpful Guides" id="guides" class="img-fluid"></img>
+        <img src="/oldbook.png" alt="Helpful Guides" id="guides" class="img-fluid"></img>
       </div>
     </div>
 
@@ -50,7 +50,7 @@ const KezdoLap = () => {
 
       
       <div class="col-md-6 text-center">
-        <img src="/Friendly_Community.png" alt="Friendly Community" id="community" class="img-fluid"></img>
+        <img src="/electonicbook.png" alt="Friendly Community" id="community" class="img-fluid"></img>
       </div>
     </div>
         </div>
