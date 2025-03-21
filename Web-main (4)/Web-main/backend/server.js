@@ -3,9 +3,11 @@ import cors from 'cors';
 import mysql2 from 'mysql2';
 import bodyParser from 'body-parser';
 import bcrypt from 'bcrypt';
+/*
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 dotenv.config();  // Betölti az .env fájlt
+*/
 const app = express();
 const saltRounds = 5;
 app.use(bodyParser.json());
@@ -28,6 +30,13 @@ const transporter = nodemailer.createTransport({
       console.log('Nodemailer is ready to send emails', success);
     }
   });
+  const db = mysql2.createConnection({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 */
 
 
@@ -36,12 +45,12 @@ app.get("/", (req, res) => {
 });
 
 const db = mysql2.createConnection({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+  user: "sabpat702",
+  host: "10.3.1.65",
+  password: "72587413702",
+  database:"sabpat702",
+  port: 3306
+})
 
 
 db.connect(err => {
