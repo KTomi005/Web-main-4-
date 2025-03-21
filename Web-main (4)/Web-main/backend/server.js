@@ -5,24 +5,44 @@ import bodyParser from 'body-parser';
 import bcrypt from 'bcrypt';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-
+dotenv.config();  // Betölti az .env fájlt
 const app = express();
 const saltRounds = 5;
-
 app.use(bodyParser.json());
 app.use(cors());
+
+/*
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS, 
+  },
+});
+
+  // Test Nodemailer setup
+  transporter.verify((error, success) => {
+    if (error) {
+      console.error('Nodemailer configuration error:', error);
+    } else {
+      console.log('Nodemailer is ready to send emails', success);
+    }
+  });
+*/
+
 
 app.get("/", (req, res) => {
     res.send("Fut a backend!");
 });
 
 const db = mysql2.createConnection({
-    user: process.env.DB_USER || "sabpat702",
-    host: process.env.DB_HOST || "10.3.1.65",
-    port: process.env.DB_PORT || 3306,
-    password: process.env.DB_PASSWORD || "72587413702",
-    database: process.env.DB_NAME || "sabpat702",
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
+
 
 db.connect(err => {
     if (err) {
@@ -32,22 +52,8 @@ db.connect(err => {
     }
 });
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER, // From .env
-      pass: process.env.EMAIL_PASS, // From .env (use App Password if 2FA is on)
-    },
-  });
   
-  // Test Nodemailer setup
-  transporter.verify((error, success) => {
-    if (error) {
-      console.error('Nodemailer configuration error:', error);
-    } else {
-      console.log('Nodemailer is ready to send emails');
-    }
-  });
+
 
 // Felhasználók lekérdezése
 app.get('/signup', (req, res) => {
