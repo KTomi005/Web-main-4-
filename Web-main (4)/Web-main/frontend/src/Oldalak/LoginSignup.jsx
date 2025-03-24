@@ -56,7 +56,7 @@ const LoginSignup = () => {
                     setShowModal(true);
                     setTimeout(() => {
                         // Itt a sima URL átirányítás
-                        window.location.href = "/Web.html";  // Ez a statikus HTML fájlra navigál
+                        window.location.href = "/Web.jsx";  // Ez a statikus HTML fájlra navigál
                     }, 2000);   
                 } else {
                     setErrorMessage(`Registration failed! Server says: ${data.message}`);
