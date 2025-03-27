@@ -46,20 +46,18 @@ const KezdoLap = () => {
                         <img src="/oldbook.png" alt="Helpful Guides" className="img-fluid kep" />
                     </div>
                 </div>
-
-                {/* Friendly Community */}
-                <div className="row align-items-center flex-row-reverse community-section">
-                    <div className="col-md-6 info-block">
-                        <h2>A Friendly Community</h2>
-                        <ul>
-                            <li><span className="icon">💬</span> A place to chat about the game.</li>
-                            <li><span className="icon">🆘</span> Ask for help from fellow players.</li>
-                            <li><span className="icon">🛡️</span> Moderated to keep a safe and friendly environment.</li>
-                        </ul>
-                    </div>
-                    <div className="col-md-6 text-center">
-                        <img src="/electonicbook.png" alt="Friendly Community" className="img-fluid kep" />
-                    </div>
+                </section>
+            {/* Friendly Community Section */}
+            <section className="row align-items-center flex-row-reverse mb-5">
+                <div className="col-md-6 info-block">
+                    <h2>A Friendly Community</h2>
+                    <ul>
+                        <li>💬 A place to read about the game.</li>
+                        <li> And in the future there will be a site, where people can chat to each other. Ask help from other players and will be Moderated to keep a safe and friendly environment!</li>
+                    </ul>
+                </div>
+                <div className="col-md-6 text-center">
+                    <img src="/electonicbook.png" alt="Friendly Community" className="img-fluid kep" />
                 </div>
             </section>
         </div>
