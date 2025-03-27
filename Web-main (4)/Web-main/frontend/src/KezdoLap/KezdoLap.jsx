@@ -21,42 +21,45 @@ const KezdoLap = () => {
                 </div>
             </header>
 
-            {/* Informational Section */}
-            <section className="Informational">
+            {/* Hero/Informational Section */}
+            <section className="Informational text-center">
                 <h3>Welcome to Dungeon Explorer!</h3>
-                <p className="lead mx-auto w-75">
+                <p className="lead mx-auto Welcome">
                     This is our very first game project, created by a small, passionate three-member team. While it may not have the best graphics yet,
                     our goal is to create a fun and engaging experience. We appreciate your support and feedback as we continue improving!
                 </p>
             </section>
 
-            {/* Helpful Guides Section */}
-            <section className="row align-items-center mb-5">
-                <div className="col-md-6 info-block">
-                    <h2>Helpful Guides</h2>
-                    <ul>
-                        <li>✅ Easy-to-understand explanations about game mechanics.</li>
-                        <li>✅ Helpful tips and tricks.</li>
-                        <li>✅ A whole gallery full of information.</li>
-                    </ul>
+            {/* Combined Guides and Community Section in a Single Frame */}
+            <section className="combined-section container">
+                {/* Helpful Guides */}
+                <div className="row align-items-center mb-4 guide-section">
+                    <div className="col-md-6 info-block">
+                        <h2>Helpful Guides</h2>
+                        <ul>
+                            <li><span className="icon">✅</span> Easy-to-understand explanations about game mechanics.</li>
+                            <li><span className="icon">✅</span> Helpful tips and tricks.</li>
+                            <li><span className="icon">✅</span> A whole gallery full of information.</li> {/* Fixed syntax error here */}
+                        </ul>
+                    </div>
+                    <div className="col-md-6 text-center">
+                        <img src="/oldbook.png" alt="Helpful Guides" className="img-fluid kep" />
+                    </div>
                 </div>
-                <div className="col-md-6 text-center">
-                    <img src="/oldbook.png"  alt="Helpful Guides" className="img-fluid kep" />
-                </div>
-            </section>
 
-            {/* Friendly Community Section */}
-            <section className="row align-items-center flex-row-reverse mb-5">
-                <div className="col-md-6 info-block">
-                    <h2>A Friendly Community</h2>
-                    <ul>
-                        <li>💬 A place to chat about the game.</li>
-                        <li>🆘 Ask for help from fellow players.</li>
-                        <li>🛡️ Moderated to keep a safe and friendly environment.</li>
-                    </ul>
-                </div>
-                <div className="col-md-6 text-center">
-                    <img src="/electonicbook.png" alt="Friendly Community" className="img-fluid kep" />
+                {/* Friendly Community */}
+                <div className="row align-items-center flex-row-reverse community-section">
+                    <div className="col-md-6 info-block">
+                        <h2>A Friendly Community</h2>
+                        <ul>
+                            <li><span className="icon">💬</span> A place to chat about the game.</li>
+                            <li><span className="icon">🆘</span> Ask for help from fellow players.</li>
+                            <li><span className="icon">🛡️</span> Moderated to keep a safe and friendly environment.</li>
+                        </ul>
+                    </div>
+                    <div className="col-md-6 text-center">
+                        <img src="/electonicbook.png" alt="Friendly Community" className="img-fluid kep" />
+                    </div>
                 </div>
             </section>
         </div>
