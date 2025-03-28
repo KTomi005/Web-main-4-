@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import '../css/DungeonBook.css';
 
 const DungeonBook = () => {
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [isFlipping, setIsFlipping] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [flipDirection, setFlipDirection] = useState(""); 
+    const [dragState, setDragState] = useState({ isDragging: false, startX: 0, dragDirection: null, rotation: 0 });
+    const bookRef = useRef(null);
 
     const pages = [
         {
@@ -123,9 +124,8 @@ const DungeonBook = () => {
     ];
 
     const nextPage = () => {
-        if (page + 1 < pages.length && !isFlipping) {
+        if (page < pages.length && !isFlipping) {
             setIsFlipping(true);
-            setFlipDirection("flip-right");
             setTimeout(() => {
                 setPage(page + 1);
                 setIsFlipping(false);
@@ -134,9 +134,8 @@ const DungeonBook = () => {
     };
 
     const prevPage = () => {
-        if (page > 0 && !isFlipping) {
+        if (page > 1 && !isFlipping) {
             setIsFlipping(true);
-            setFlipDirection("flip-left");
             setTimeout(() => {
                 setPage(page - 1);
                 setIsFlipping(false);
@@ -148,35 +147,156 @@ const DungeonBook = () => {
         setIsOpen(!isOpen);
     };
 
+    // Drag handling
+    const handleDragStart = (e) => {
+        if (!isOpen || isFlipping) return;
+
+        const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+        const bookRect = bookRef.current.getBoundingClientRect();
+        const bookCenter = bookRect.left + bookRect.width / 2;
+
+        setDragState({
+            isDragging: true,
+            startX: clientX,
+            dragDirection: clientX < bookCenter ? "left" : "right",
+            rotation: 0,
+        });
+    };
+
+    const handleDragMove = (e) => {
+        if (!dragState.isDragging) return;
+
+        const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+        const bookRect = bookRef.current.getBoundingClientRect();
+        const bookWidth = bookRect.width / 2; // Width of one page
+        const deltaX = clientX - dragState.startX;
+
+        // Calculate rotation based on drag distance
+        let rotation;
+        if (dragState.dragDirection === "right") {
+            // Dragging right page to the left
+            rotation = Math.min(Math.max((deltaX / bookWidth) * -180, -180), 0);
+        } else {
+            // Dragging left page to the right
+            rotation = Math.min(Math.max((deltaX / bookWidth) * 180, 0), 180);
+        }
+
+        setDragState((prev) => ({ ...prev, rotation }));
+    };
+
+    const handleDragEnd = (e) => {
+        if (!dragState.isDragging) return;
+
+        const clientX = e.type === "touchend" ? e.changedTouches[0].clientX : e.clientX;
+        const deltaX = clientX - dragState.startX;
+        const bookRect = bookRef.current.getBoundingClientRect();
+        const bookWidth = bookRect.width / 2;
+        const threshold = bookWidth * 0.5; // Flip if dragged more than 50% of the page width
+
+        const shouldFlip = Math.abs(deltaX) > threshold;
+
+        if (shouldFlip) {
+            if (dragState.dragDirection === "right" && page < pages.length) {
+                nextPage();
+            } else if (dragState.dragDirection === "left" && page > 1) {
+                prevPage();
+            }
+        }
+
+        setDragState({ isDragging: false, startX: 0, dragDirection: null, rotation: 0 });
+    };
+
     return (
         <div className="dungeon-book-container">
-            <div className={`book ${isOpen ? 'open' : 'closed'}`}>
+            <div
+                className={`book ${isOpen ? 'open' : 'closed'}`}
+                ref={bookRef}
+                onMouseDown={handleDragStart}
+                onMouseMove={handleDragMove}
+                onMouseUp={handleDragEnd}
+                onMouseLeave={handleDragEnd}
+                onTouchStart={handleDragStart}
+                onTouchMove={handleDragMove}
+                onTouchEnd={handleDragEnd}
+            >
+                {/* Book Spine */}
                 <div className="book-spine">
                     <h2>Dungeon Valley Explorer</h2>
                 </div>
                 <div className="book-inner">
+                    {/* Book Cover */}
                     {!isOpen && (
                         <div className="book-cover">
                             <h1>Dungeon Valley Explorer</h1>
                             <p>A Text-Based Adventure</p>
                         </div>
                     )}
+                    {/* Pages */}
                     {isOpen && (
                         <>
-                            <div className={`left-page ${isFlipping ? flipDirection : ''}`}>
-                                {page > 0 ? (
+                            <div className="page left-page">
+                                {page > 1 ? (
                                     <>
-                                        <h2>{pages[page - 1].title}</h2>
-                                        <p>{pages[page - 1].content}</p>
+                                        <h2>{pages[page - 2].title}</h2>
+                                        <p>{pages[page - 2].content}</p>
                                     </>
                                 ) : (
-                                    <div className="empty-page"></div>
+                                    <div className="empty-page"> </div>
                                 )}
                             </div>
-                            <div className={`right-page ${isFlipping ? flipDirection : ''}`}>
-                                <h2>{pages[page].title}</h2>
-                                <p>{pages[page].content}</p>
+                            <div className="page right-page">
+                                <h2>{pages[page - 1].title}</h2>
+                                <p>{pages[page - 1].content}</p>
                             </div>
+                            {/* Flipping page overlay */}
+                            {dragState.isDragging && dragState.dragDirection === "right" && (
+                                <div
+                                    className="page flipping-page right-page-flip"
+                                    style={{ transform: `rotateY(${dragState.rotation}deg)` }}
+                                >
+                                    <div className="page-front">
+                                        <h2>{pages[page - 1].title}</h2>
+                                        <p>{pages[page - 1].content}</p>
+                                    </div>
+                                    <div className="page-back">
+                                        {page < pages.length ? (
+                                            <>
+                                                <h2>{pages[page].title}</h2>
+                                                <p>{pages[page].content}</p>
+                                            </>
+                                        ) : (
+                                            <div className="empty-page"> </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                            {dragState.isDragging && dragState.dragDirection === "left" && (
+                                <div
+                                    className="page flipping-page left-page-flip"
+                                    style={{ transform: `rotateY(${dragState.rotation}deg)` }}
+                                >
+                                    <div className="page-front">
+                                        {page > 1 ? (
+                                            <>
+                                                <h2>{pages[page - 2].title}</h2>
+                                                <p>{pages[page - 2].content}</p>
+                                            </>
+                                        ) : (
+                                            <div className="empty-page"> </div>
+                                        )}
+                                    </div>
+                                    <div className="page-back">
+                                        {page > 2 ? (
+                                            <>
+                                                <h2>{pages[page - 3].title}</h2>
+                                                <p>{pages[page - 3].content}</p>
+                                            </>
+                                        ) : (
+                                            <div className="empty-page"> </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
                         </>
                     )}
                 </div>
@@ -186,8 +306,8 @@ const DungeonBook = () => {
                     <button onClick={toggleBook}>Open Book</button>
                 ) : (
                     <>
-                        <button onClick={prevPage} disabled={page === 0 || isFlipping}>Previous</button>
-                        <button onClick={nextPage} disabled={page === pages.length - 1 || isFlipping}>Next</button>
+                        <button onClick={prevPage} disabled={page === 1 || isFlipping}>Previous</button>
+                        <button onClick={nextPage} disabled={page === pages.length || isFlipping}>Next</button>
                         <button onClick={toggleBook}>Close Book</button>
                     </>
                 )}
