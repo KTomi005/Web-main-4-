@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import '../css/DungeonBook.css';
 
 const DungeonBook = () => {
-    const [page, setPage] = useState(1); // Aktuális oldal
-    const [isFlipping, setIsFlipping] = useState(false); // Lapozás animáció
-    const [isOpen, setIsOpen] = useState(false); // Könyv nyitva/casukva állapota
+    const [page, setPage] = useState(0);
+    const [isFlipping, setIsFlipping] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [flipDirection, setFlipDirection] = useState(""); 
 
-    // Oldalak (rövidítve, használd a saját tartalmadat)
     const pages = [
         {
             title: "Introduction Hero And NPC's",
@@ -123,8 +123,9 @@ const DungeonBook = () => {
     ];
 
     const nextPage = () => {
-        if (page < pages.length && !isFlipping) {
+        if (page + 1 < pages.length && !isFlipping) {
             setIsFlipping(true);
+            setFlipDirection("flip-right");
             setTimeout(() => {
                 setPage(page + 1);
                 setIsFlipping(false);
@@ -133,8 +134,9 @@ const DungeonBook = () => {
     };
 
     const prevPage = () => {
-        if (page > 1 && !isFlipping) {
+        if (page > 0 && !isFlipping) {
             setIsFlipping(true);
+            setFlipDirection("flip-left");
             setTimeout(() => {
                 setPage(page - 1);
                 setIsFlipping(false);
@@ -143,36 +145,37 @@ const DungeonBook = () => {
     };
 
     const toggleBook = () => {
-        setIsOpen(!isOpen); // Könyv kinyitása/becsukása
+        setIsOpen(!isOpen);
     };
 
     return (
         <div className="dungeon-book-container">
             <div className={`book ${isOpen ? 'open' : 'closed'}`}>
+                <div className="book-spine">
+                    <h2>Dungeon Valley Explorer</h2>
+                </div>
                 <div className="book-inner">
-                    {/* Borító, ha csukva van */}
                     {!isOpen && (
                         <div className="book-cover">
                             <h1>Dungeon Valley Explorer</h1>
                             <p>A Text-Based Adventure</p>
                         </div>
                     )}
-                    {/* Lapok, ha nyitva van */}
                     {isOpen && (
                         <>
-                            <div className={`page left-page ${isFlipping ? 'flip-left' : ''}`}>
-                                {page > 1 ? (
+                            <div className={`left-page ${isFlipping ? flipDirection : ''}`}>
+                                {page > 0 ? (
                                     <>
-                                        <h2>{pages[page - 2].title}</h2>
-                                        <p>{pages[page - 2].content}</p>
+                                        <h2>{pages[page - 1].title}</h2>
+                                        <p>{pages[page - 1].content}</p>
                                     </>
                                 ) : (
-                                    <div className="empty-page"> </div>
+                                    <div className="empty-page"></div>
                                 )}
                             </div>
-                            <div className={`page right-page ${isFlipping ? 'flip-right' : ''}`}>
-                                <h2>{pages[page - 1].title}</h2>
-                                <p>{pages[page - 1].content}</p>
+                            <div className={`right-page ${isFlipping ? flipDirection : ''}`}>
+                                <h2>{pages[page].title}</h2>
+                                <p>{pages[page].content}</p>
                             </div>
                         </>
                     )}
@@ -183,8 +186,8 @@ const DungeonBook = () => {
                     <button onClick={toggleBook}>Open Book</button>
                 ) : (
                     <>
-                        <button onClick={prevPage} disabled={page === 1 || isFlipping}>Previous</button>
-                        <button onClick={nextPage} disabled={page === pages.length || isFlipping}>Next</button>
+                        <button onClick={prevPage} disabled={page === 0 || isFlipping}>Previous</button>
+                        <button onClick={nextPage} disabled={page === pages.length - 1 || isFlipping}>Next</button>
                         <button onClick={toggleBook}>Close Book</button>
                     </>
                 )}
