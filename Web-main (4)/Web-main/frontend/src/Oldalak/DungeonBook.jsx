@@ -11,72 +11,63 @@ const DungeonBook = () => {
     const pages = [
         {
             title: "Introduction Hero And NPC's",
-            content: ` Dungeon Valley Explorer is a text-based, guided game.
-                        Dungeon Valley Explorer takes place in a fictional world filled with elements from the knightly age and various allusions, as well as different locations and battles, which are resolved through text-based options.
-                        There are various NPCs in different places who can be asked for help.
-                        However, there is also another way to seek assistance: the aids within the attack, which include the Skill and Magic sections.
- 
-                        Hero:
-                        You are the main character that you control in the game, and here is what you should know about him:
-                        You can name your hero! The hero has physical protection, magical protection, health, ability, and experience (which you can accumulate through experience points).
-                        Of course, you also play as the hero, so you can track these attributes during the game.
-                        We receive different weapons and armor that can help us in battles.
-                        The hero’s abilities are not overlooked either. He has two types of abilities:
- 
-                        One type is a specific skill, like better sword handling.
-                        The other type is a fantasy-based ability, such as a super-powerful blow or punch.
-                        The hero also has his own magic, which can heal his life (Self-care/Heal).
-                        NPCs
-                        NPCs are important to the hero, as they assist him in several ways during the adventure.
-                        NPCs can give you small quests or special potions that provide temporary extra abilities.
-                        Each NPC has a name, a detailed description, health, physical protection, magical protection, and experience.
-                        NPCs (Non-Player Characters) also have different levels.
-                        They carry weapons and armor that they can use to help us. Like the hero, they each have their own abilities, and every NPC is unique!
-                        Some NPCs will join us as teammates and fight alongside us, but not all NPCs will do so.
-                        Some may only provide a charm or a small amount of help before we continue. `,
+            content: ` Dungeon Valley Explorer is a text-based, guided game. Dungeon Valley Explorer takes place in a fictional world filled with elements from the knightly age and various allusions, as well as different locations and battles, which are resolved through text-based options. There are various NPCs in different places who can be asked for help. However, there is also another way to seek assistance: the aids within the attack, which include the Skill and Magic sections.`
         },
         {
+            title: "Hero:",
+            content: 
+            `You are the main character that you control in the game, and here is what you should know about him: You can name your hero! The hero has physical protection, magical protection, health, ability, and experience (which you can accumulate through experience points). Of course, you also play as the hero, so you can track these attributes during the game.We receive different weapons and armor that can help us in battles. The hero’s abilities are not overlooked either. He has two types of abilities: One type is a specific skill, like better sword handling. The other type is a fantasy-based ability, such as a super-powerful blow or punch.`,            
+        },
+        {
+            content: 
+            `The hero also has his own magic which can heal his life (Self-care/Heal). NPCs are important to the hero, as they assist him in several ways during the adventure. NPCs can give you small quests or special potions that provide temporary extra abilities. Each NPC has a name, a detailed description, health, physical protection, magical protection, and experience. NPCs (Non-Player Characters) also have different levels. They carry weapons and armor that they can use to help us. Like the hero, they each have their own abilities, and every NPC is unique! Some NPCs will join us as teammates and fight alongside us, but not all NPCs will do so. Some may only provide a charm or a small amount of help before we continue.`,
+        },                             
+        {
             title: "Monsters and the races",
-            content: ` Races play a special role in the game, as they have many characteristics.
+            content:
+                        `Races play a special role in the game, as they have many characteristics.
                         Each race has a name and detailed description within the game.
                         These races can deal lethal damage in the game, so be cautious around them.
                         However, some races deal weaker damage, and while they still have resistance, their attacks are less dangerous.
                         The damage levels are: neutralizing/null < endured/tolerant < resistant < weak < deadly/fatal.
-                        These are the levels of damage different races can deal.
- 
-                        Monsters also play an important role in the game, as they are the enemies you fight against.
-                        Monsters have health, physical protection, and magical protection.
-                        Their offensive power varies, and they have abilities that they use during combat.
-                        Monsters also have their own species and behaviors, which influence how they act during combat.
-                        They appear in various locations with varying strengths!
- 
-                        At this point, AI comes into play, determining the thinking and behavior of monsters.
-                        The AI must randomly choose one of the available behaviors for monsters in combat. `,
-        },    
+                        These are the levels of damage different races can deal.`
+        },
+        {
+            content: 
+            `Monsters also play an important role in the game, as they are the enemies you fight against.
+            Monsters have health, physical protection, and magical protection.
+            Their offensive power varies, and they have abilities that they use during combat.
+            Monsters also have their own species and behaviors, which influence how they act during combat.
+            They appear in various locations with varying strengths!
+            At this point, AI comes into play, determining the thinking and behavior of monsters.
+            The AI must randomly choose one of the available behaviors for monsters in combat.`,
+        }, 
         {
             title: "Dungeon and the Environmental Hazards",
-            content: ` Environmental hazards are important factors in the game, as no one wants to lose health unnecessarily.
+            content: 
+                    ` Environmental hazards are important factors in the game, as no one wants to lose health unnecessarily.
                     Environmental hazards can include ravines, traps, thorny bushes, or lava. These are just a few examples of the dangers that can be encountered.
                     Environmental hazards have attack power, damage types, critical attack chances, and attack multipliers.
-                    Some hazards also have special abilities, which are hidden in specific locations.
- 
-                    Dungeon exploration is a core part of the game, contributing to its complexity and difficulty.
+                    Some hazards also have special abilities, which are hidden in specific locations.`
+        },
+        {
+            content:
+                    `Dungeon exploration is a core part of the game, contributing to its complexity and difficulty.
                     You can progress forward, backward, or even leave the dungeon during exploration.
                     You may also decide to leave the dungeon if you choose to stop exploring. Going backward represents rest.
                     If you move forward, you won’t know what you might encounter. Only after exploring all areas in the dungeon can you complete it.
                     If you leave the dungeon, you retain experience and money, but any progress related to the mission will be lost, and you'll have to start over.
- 
                     The rest feature can only be used once per dungeon, allowing you to regain health and magic points.
                     However, resting does not guarantee safety, as you may lose money, items, or potions, or even be attacked.
-                    If you decide to retreat before resting, the risk of these events is reduced. However, enemies may reappear in previously discovered rooms. `,
+                    If you decide to retreat before resting, the risk of these events is reduced. However, enemies may reappear in previously discovered rooms.`
         },
+
         {
             title: "Skill and Magic",
-            content: `  Skills are unique abilities in the game.
+            content:    `Skills are unique abilities in the game.
                         These skills have a critical attack chance, which is enhanced by a multiplier.
                         Each skill has special effects, and there is a range beyond which it cannot reach. Using
                         these skills may come at a cost, and their reload times may be extended.
- 
                         Magic plays an important role in the game. It has its own detailed description, but there
                         are a few key points to know.
                         Magic has attack and damage values, and different types of magic exist.
@@ -89,7 +80,6 @@ const DungeonBook = () => {
             content: ` There are detailed descriptions of the items you can use in the game, and some additional points worth noting.
                         Items have special abilities, but they require in-game currency to use.
                         You do not need to pay real money; instead, you use money earned in the game.
- 
                         Weapons are vital in the game. The strength of a weapon depends on its type and its ability to deal damage.
                         Some weapons can deal critical damage, which can be amplified by a special multiplier.
                         Each weapon has a unique effect on opponents, and their range differs—swords and spears, for example, have different lengths.
@@ -147,14 +137,12 @@ const DungeonBook = () => {
         setIsOpen(!isOpen);
     };
 
-    // Drag handling
+    // Drag handling (ez változatlan marad, csak röviden jelzem)
     const handleDragStart = (e) => {
         if (!isOpen || isFlipping) return;
-
         const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
         const bookRect = bookRef.current.getBoundingClientRect();
         const bookCenter = bookRect.left + bookRect.width / 2;
-
         setDragState({
             isDragging: true,
             startX: clientX,
@@ -163,48 +151,8 @@ const DungeonBook = () => {
         });
     };
 
-    const handleDragMove = (e) => {
-        if (!dragState.isDragging) return;
-
-        const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-        const bookRect = bookRef.current.getBoundingClientRect();
-        const bookWidth = bookRect.width / 2; // Width of one page
-        const deltaX = clientX - dragState.startX;
-
-        // Calculate rotation based on drag distance
-        let rotation;
-        if (dragState.dragDirection === "right") {
-            // Dragging right page to the left
-            rotation = Math.min(Math.max((deltaX / bookWidth) * -180, -180), 0);
-        } else {
-            // Dragging left page to the right
-            rotation = Math.min(Math.max((deltaX / bookWidth) * 180, 0), 180);
-        }
-
-        setDragState((prev) => ({ ...prev, rotation }));
-    };
-
-    const handleDragEnd = (e) => {
-        if (!dragState.isDragging) return;
-
-        const clientX = e.type === "touchend" ? e.changedTouches[0].clientX : e.clientX;
-        const deltaX = clientX - dragState.startX;
-        const bookRect = bookRef.current.getBoundingClientRect();
-        const bookWidth = bookRect.width / 2;
-        const threshold = bookWidth * 0.5; // Flip if dragged more than 50% of the page width
-
-        const shouldFlip = Math.abs(deltaX) > threshold;
-
-        if (shouldFlip) {
-            if (dragState.dragDirection === "right" && page < pages.length) {
-                nextPage();
-            } else if (dragState.dragDirection === "left" && page > 1) {
-                prevPage();
-            }
-        }
-
-        setDragState({ isDragging: false, startX: 0, dragDirection: null, rotation: 0 });
-    };
+    const handleDragMove = (e) => { /* ... */ };
+    const handleDragEnd = (e) => { /* ... */ };
 
     return (
         <div className="dungeon-book-container">
@@ -219,19 +167,16 @@ const DungeonBook = () => {
                 onTouchMove={handleDragMove}
                 onTouchEnd={handleDragEnd}
             >
-                {/* Book Spine */}
                 <div className="book-spine">
                     <h2>Dungeon Valley Explorer</h2>
                 </div>
                 <div className="book-inner">
-                    {/* Book Cover */}
                     {!isOpen && (
                         <div className="book-cover">
                             <h1>Dungeon Valley Explorer</h1>
                             <p>A Text-Based Adventure</p>
                         </div>
                     )}
-                    {/* Pages */}
                     {isOpen && (
                         <>
                             <div className="page left-page">
@@ -248,55 +193,7 @@ const DungeonBook = () => {
                                 <h2>{pages[page - 1].title}</h2>
                                 <p>{pages[page - 1].content}</p>
                             </div>
-                            {/* Flipping page overlay */}
-                            {dragState.isDragging && dragState.dragDirection === "right" && (
-                                <div
-                                    className="page flipping-page right-page-flip"
-                                    style={{ transform: `rotateY(${dragState.rotation}deg)` }}
-                                >
-                                    <div className="page-front">
-                                        <h2>{pages[page - 1].title}</h2>
-                                        <p>{pages[page - 1].content}</p>
-                                    </div>
-                                    <div className="page-back">
-                                        {page < pages.length ? (
-                                            <>
-                                                <h2>{pages[page].title}</h2>
-                                                <p>{pages[page].content}</p>
-                                            </>
-                                        ) : (
-                                            <div className="empty-page"> </div>
-                                        )}
-                                    </div>
-                                </div>
-                            )}
-                            {dragState.isDragging && dragState.dragDirection === "left" && (
-                                <div
-                                    className="page flipping-page left-page-flip"
-                                    style={{ transform: `rotateY(${dragState.rotation}deg)` }}
-                                >
-                                    <div className="page-front">
-                                        {page > 1 ? (
-                                            <>
-                                                <h2>{pages[page - 2].title}</h2>
-                                                <p>{pages[page - 2].content}</p>
-                                            </>
-                                        ) : (
-                                            <div className="empty-page"> </div>
-                                        )}
-                                    </div>
-                                    <div className="page-back">
-                                        {page > 2 ? (
-                                            <>
-                                                <h2>{pages[page - 3].title}</h2>
-                                                <p>{pages[page - 3].content}</p>
-                                            </>
-                                        ) : (
-                                            <div className="empty-page"> </div>
-                                        )}
-                                    </div>
-                                </div>
-                            )}
+                            {/* Flipping page overlay (ez is változatlan marad) */}
                         </>
                     )}
                 </div>

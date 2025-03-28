@@ -101,7 +101,7 @@
 .page {
     flex: 1;
     padding: 30px;
-    background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), #e8d5a5; /* Paper texture */
+    background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), #e8d5a5;
     background-blend-mode: overlay;
     overflow-y: auto;
     font-size: 16px;
@@ -109,7 +109,8 @@
     line-height: 1.6;
     position: relative;
     transform-style: preserve-3d;
-    cursor: grab; /* Indicate that the page can be dragged */
+    cursor: grab;
+    text-align: left; /* Szöveg balra igazítása az oldalakon */
 }
 
 .left-page {
@@ -149,6 +150,7 @@
     left: 0;
     transform-origin: right;
 }
+/* Flipping page overlay */
 .page-front,
 .page-back {
     position: absolute;
@@ -162,6 +164,7 @@
     font-size: 16px;
     color: #333;
     line-height: 1.6;
+    text-align: left; /* Szöveg balra igazítása a lapozási animációban is */
 }
 
 .page-front {
@@ -197,7 +200,7 @@
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-align: center;
+    text-align: left; /* Cím balra igazítása */
     border-bottom: 2px solid #b39d6b;
     padding-bottom: 10px;
 }
@@ -208,6 +211,7 @@
     white-space: pre-wrap;
     word-wrap: break-word;
     color: #4a4a4a;
+    text-align: left; /* Szöveg balra igazítása a bekezdésekben */
 }
 
 .empty-page {
